@@ -73,6 +73,27 @@ describe UsersController do
   end
 
   describe "Put #update" do
+    context "valid attributes"
+      it "should locate correct/requested user" do
+        put :update, id: @user, user: attribures_for(:user, username: "updated")
+        expect(assigns[:user]).to eq(@user)
+      end
+      it "should update attributes for correct/requested user" do
+        put :update, id: @user, user: attributes_for(:user, username: "updated")
+        expect(@user.username).to eq("updated")
+      end
+      it "shout redirect to user profile" do
+        puts :update, id: @user, user: attributes_for(:user, username: "updated")
+        @user.reload
+        expect(response).to redirect_to(user_path(@user))
+      end
+    end
+    context "invalid attributes" do
+      it "should not save into the database" do
+        puts :update, id: @user, user: attributes_for(:invalid_user)
+        expect(response).to render_template(:edit)
+      end
+    end
   end
 
   describe "Delete #destroy" do
