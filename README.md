@@ -1,3 +1,3 @@
-![Circle CI](https://circleci.com/gh/:as9045/:name-generator.png?circle-token=:circle-token)
+[![Circle CI](https://circleci.com/gh/aj9045/name-generator.svg?style=svg)](https://circleci.com/gh/aj9045/name-generator)
 name-generator
 ==============
