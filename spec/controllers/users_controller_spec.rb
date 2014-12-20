@@ -97,6 +97,21 @@ describe UsersController do
   end
 
   describe "Delete #destroy" do
+    it "should locate the correct/requested user" do
+      delete :destroy, id: @user
+      expect(assigns[:user]).to eq(@user)
+    end
+    it "should validate that the user's id is the same as the logged in user" do
+      delete :destroy, id: @user
+      expect(session[:user_id]).to eq(@user.id)
+    end
+    it "should remove user from database" do
+      expect { delete :destroy, id: @user }.to change(User, :count).by(-1)
+    end
+    it "should redirect to root_path" do
+      delete :destroy, id: @user
+      expect(response).to redirect_to(root_path)
+    end
   end
 
 end
