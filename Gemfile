@@ -28,6 +28,10 @@ gem 'spring',        group: :development
 
 gem "factory_girl_rails", "~> 4.0"
 
+group :test do
+  gem 'shoulda-matchers', require: false
+end
+
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
 end
