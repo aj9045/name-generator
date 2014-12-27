@@ -1,7 +1,7 @@
 class CreateFirstNames < ActiveRecord::Migration
   def change
     create_table :first_names do |t|
-      t.first_name
+      t.string :first_name, null: false
 
       t.timestamps
     end
