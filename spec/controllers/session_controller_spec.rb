@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe SessionController do
+describe SessionController, type: :controller do
   describe "Get #new" do
     it "should render login" do
       get :new
