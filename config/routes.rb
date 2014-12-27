@@ -9,6 +9,11 @@ Rails.application.routes.draw do
   resources :first_names, only: [:new, :create, :show]
   resources :last_names, only: [:new, :create, :show]
   resources :entries
+
+  get "session/new" => "session#new"
+  post "session/login" => "session#login"
+  get "session/logout" => "session#logout"
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
