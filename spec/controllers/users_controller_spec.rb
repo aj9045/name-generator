@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe UsersController do
+describe UsersController, type: :controller do
   before do
     @user = FactoryGirl.create(:user)
     session[:user_id] = @user.id
