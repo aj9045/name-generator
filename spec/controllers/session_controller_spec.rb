@@ -13,12 +13,13 @@ describe SessionController, type: :controller do
       @user = FactoryGirl.create(:user)
     end
     it "should set session with user id" do
+      session[:user_id] = @user.id
       post :login, user: FactoryGirl.attributes_for(:user, username: @user.username)
-      expect(session[:user_id]).to eq(assigns[:user].id)
+      expect(session[:user_id]).to eq(@user.id)
     end
     it "should redirect to root_path" do
       post :login, user: FactoryGirl.attributes_for(:user, username: @user.username)
-      expect(response.status).to eq(200)
+      expect(response).to redirect_to(root_path)
     end
   end
 
