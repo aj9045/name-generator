@@ -14,7 +14,7 @@ describe UsersController, type: :controller do
       end
 
       it "renders :show template" do
-        get :show, id: @user_id
+        get :show, id: @user
         expect(response).to render_template(:show)
       end
     end
@@ -26,7 +26,7 @@ describe UsersController, type: :controller do
       end
 
       it "renders :edit template (with update form)" do
-        get :edit, id: @user_id
+        get :edit, id: @user
         expect(response).to render_template(:edit)
       end
     end
@@ -34,11 +34,11 @@ describe UsersController, type: :controller do
     describe "Get #new" do
       it "assigns a new user" do
         get :new, id: @user
-        expect(assigns[:user]).to eq(@user)
+        expect(assigns[:user]).to be_a_new(User)
       end
 
       it "renders :new template (with create form)" do
-        get :new, id: @user_id
+        get :new
         expect(response).to render_template(:new)
       end
     end
@@ -50,7 +50,7 @@ describe UsersController, type: :controller do
         expect { post :create, user: FactoryGirl.attributes_for(:user) }.to change(User, :count).by(1)
       end
 
-      it "redirects to root" do
+      it "redirects to root path" do
         post :create, user: FactoryGirl.attributes_for(:user)
         expect(response).to redirect_to(root_path)
       end
@@ -61,10 +61,10 @@ describe UsersController, type: :controller do
       end
     end
     context "invalid attributes" do
-      it "should not save into the database" do
+      it "doesn't save into the database" do
         expect { post :create, user: FactoryGirl.attributes_for(:invalid_user) }.to_not change(User, :count)
       end
-      it "should re-render :new template" do
+      it "re-renders :new template" do
         post :create, user: FactoryGirl.attributes_for(:invalid_user)
         expect(response).to render_template(:new)
       end
@@ -73,41 +73,41 @@ describe UsersController, type: :controller do
 
   describe "Put #update" do
     context "valid attributes" do
-      it "should locate correct/requested user" do
-        put :update, id: @user, user: FactoryGirl.attributes_for(:user, username: "updated")
-        expect(assigns[:user]).to eq(@user)
+      it "locates the requested user" do
+        put :update, id: @user, user: FactoryGirl.attributes_for(:user)
+        expect(assigns(:user)).to eq(@user)
       end
-      it "should update attributes for correct/requested user" do
-        put :update, id: @user, user: FactoryGirl.attributes_for(:user, username: "updated")
-        expect(@user.username).to eq("updated")
-      end
-      it "shout redirect to user profile" do
-        puts :update, id: @user, user: FactoryGirl.attributes_for(:user, username: "updated")
+      it "changes users attributes" do
+        put :update, id: @user, user: FactoryGirl.attributes_for(:user, username: "Larry")
         @user.reload
-        expect(response).to redirect_to(user_path(@user))
+        expect(@user.username).to eq("Larry")
+      end
+      it "redirects to the updated user" do
+        put :update, id: @user, user: FactoryGirl.attributes_for(:user)
+        expect(response).to redirect_to(@user)
       end
     end
     context "invalid attributes" do
-      it "should not save into the database" do
-        puts :update, id: @user, user: FactoryGirl.attributes_for(:invalid_user)
+      it "doesn't save into the database" do
+        put :update, id: @user, user: FactoryGirl.attributes_for(:invalid_user)
         expect(response).to render_template(:edit)
       end
     end
   end
 
   describe "Delete #destroy" do
-    it "should locate the correct/requested user" do
+    it "locates the correct/requested user" do
       delete :destroy, id: @user
       expect(assigns[:user]).to eq(@user)
     end
-    it "should validate that the user's id is the same as the logged in user" do
+    it "validates that the user's id is the same as the logged in user" do
       delete :destroy, id: @user
       expect(session[:user_id]).to eq(@user.id)
     end
-    it "should remove user from database" do
-      expect { delete :destroy, id: @user }.to change(User, :count).by(-1)
+    it "removes user from database" do
+      expect{ delete :destroy, id: @user }.to change(User, :count).by(-1)
     end
-    it "should redirect to root_path" do
+    it "redirects to root_path" do
       delete :destroy, id: @user
       expect(response).to redirect_to(root_path)
     end
