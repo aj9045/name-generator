@@ -5,10 +5,11 @@ class SessionController < ApplicationController
 
   def login
     @user = User.find_by(username: user_params[:username])
-    if @user.password == user_params[:password]
+    if @user
       session[:user_id] = @user.id
-    else
       redirect_to root_path
+    else
+      redirect_to login_path
     end
   end
 
