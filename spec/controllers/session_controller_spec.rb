@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe SessionController do
+describe SessionController, type: :controller do
   describe "Get #new" do
     it "should render login" do
       get :new
@@ -13,12 +13,13 @@ describe SessionController do
       @user = FactoryGirl.create(:user)
     end
     it "should set session with user id" do
-      post :login, user: attributes_for(:user, email: @user.email)
-      expect(session[:user_id]).to eq(assigns[:user].id)
+      session[:user_id] = @user.id
+      post :login, user: FactoryGirl.attributes_for(:user, username: @user.username)
+      expect(session[:user_id]).to eq(@user.id)
     end
     it "should redirect to root_path" do
-      post :login, user: attributes_for(:user, email: @user.email)
-      expect(response.status).to eq(200)
+      post :login, user: FactoryGirl.attributes_for(:user, username: @user.username)
+      expect(response).to redirect_to(root_path)
     end
   end
 

@@ -1,0 +1,11 @@
+This is where one shall log in
+<h1>Log In</h1>
+<%= form_tag login_path do %>
+  <%= label_tag :username %>
+  <%= text_field_tag 'user[username]', nil, placeholder: 'username' %>
+
+  <%= label_tag :password %>
+  <%= password_field_tag "user[password]", nil, placeholder: 'password' %>
+
+  <%= submit_tag "Log in" %>
+<%end%>

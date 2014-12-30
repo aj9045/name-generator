@@ -7,6 +7,28 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <header>
+    <div class="container">
+      <h1>Les Noms</h1>
+      <% if current_user %>
+      <h3>Welcome, <%= current_user.name %>!</h3>
+      <% end %>
+        <nav>
+          <ul>
+            <li><%= link_to "Home", root_path %></li>
+            <li><%= link_to "All Users", users_path%></a></li>
+            <% if current_user %>
+            <li><%= link_to current_user.username, user_path(session[:user_id]) %></li>
+            <li><%= link_to "Logout", logout_path %></li>
+            <% else %>
+            <li><%= link_to "Login", login_path %></li>
+            <li><%= link_to "Sign Up", new_user_path %></li>
+            <% end %>
+
+          </ul>
+        </nav>
+      </div>
+  </header>
 
 <%= yield %>
 
