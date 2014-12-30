@@ -1,9 +1,11 @@
 <% if current_user %>
-<h2>Hello, <%= @user.name %></h2>
+  <h2>Hello, <%= @user.name %></h2>
+  <p>Username: <%= @user.username %></p>
+<% else %>
+  <h2><%= @user.username %></h2>
 <% end %>
-<p>Username: <%= @user.username %></p>
-<p>About: <%= @user.about %></p>
+  <p>About: <%= @user.about %></p>
 
 <% if current_user %>
-<%= link_to "Delete Account", user_path(@user.id), method: :delete %>
+  <%= link_to "Delete Account", user_path(@user.id), method: :delete %>
 <% end %>
