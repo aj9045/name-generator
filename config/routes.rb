@@ -10,9 +10,10 @@ Rails.application.routes.draw do
   resources :last_names, only: [:new, :create, :show]
   resources :entries
 
-  get "session/new" => "session#new"
-  post "session/login" => "session#login"
-  get "session/logout" => "session#logout"
+  get "/login" => "session#new"
+  post "/login" => "session#login"
+  get "/logout" => "session#logout"
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
