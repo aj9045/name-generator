@@ -1,0 +1,9 @@
+<p>Add note to:</p>
+<p><%= @entry.first_name.first_name + " " + @entry.last_name.last_name %></p>
+
+<%= form_for @entry do |f| %>
+  <%= f.hidden_field :user_id, value: @user.id %>
+  <%= f.label :note %>
+  <%= f.text_area :note, value: @entry.note, placeholder: "Write a note here." %>
+  <%= f.submit "Save" %>
+<% end %>
