@@ -6,6 +6,9 @@
 <% end %>
   <p>About: <%= @user.about %></p>
 
-<% if current_user %>
+<% if session[:user_id] == @user.id %>
   <%= link_to "Delete Account", user_path(@user.id), method: :delete %>
 <% end %>
+
+<br>
+<%= render :partial => "entries/note", locals: { user: @user } %>
