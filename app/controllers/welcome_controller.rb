@@ -3,5 +3,6 @@ class WelcomeController < ApplicationController
     generator = Generator.new
     @random_last_name = generator.last_name
     @random_first_name = generator.first_name
+    @entry = Entry.new
   end
 end
