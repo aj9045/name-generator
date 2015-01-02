@@ -19,11 +19,24 @@ class EntriesController < ApplicationController
     end
   end
 
+  def show
+
+  end
+
   def edit
+    @user = User.find(session[:user_id])
+    @entry = Entry.find(params[:id])
   end
 
   def update
-
+    @user = User.find(session[:user_id])
+    @entry = Entry.find(params[:id])
+    if @entry.update(entry_params)
+      flash[:notice] = "Your note has been updated"
+      redirect_to user_path(@user)
+    else
+      redirect_to user_path(@user)
+    end
   end
 
   def destroy
@@ -32,7 +45,7 @@ class EntriesController < ApplicationController
   private
 
   def entry_params
-    params.require(:entry).permit(:first_name, :last_name)
+    params.require(:entry).permit(:first_name, :last_name, :note, :user_id)
   end
 
 end
