@@ -5,4 +5,8 @@ class WelcomeController < ApplicationController
     @random_first_name = generator.first_name
     @entry = Entry.new
   end
+
+  def show
+    @entry = Entry.new
+  end
 end
