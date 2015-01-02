@@ -1,6 +1,12 @@
 This is where the generator shall go.
 <br>
 
-<%= @random_first_name %>
-<%= @random_last_name %>
+<%= form_tag new_entry_path do %>
+  <%= label_tag :first_name %>
+  <%= text_field_tag 'entry[first_name]', @random_first_name %>
 
+  <%= label_tag :last_name %>
+  <%= text_field_tag "entry[last_name]", @random_last_name %>
+
+  <%= submit_tag "Save" %>
+<%end%>
