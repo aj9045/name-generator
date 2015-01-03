@@ -7,8 +7,10 @@ This is where the generator shall go.
 
   <%= f.label :last_name %>
   <%= f.text_field :last_name, :value => @random_last_name %>
+  <% if session[:user_id] != nil %>
 
-  <%= f.submit "Save" %>
+    <%= f.submit "Save" %>
+  <% end %>
 <%end%>
   <% if flash[:notice] %>
     <div class="notice"><%= flash[:notice] %></div>
