@@ -40,6 +40,11 @@ class EntriesController < ApplicationController
   end
 
   def destroy
+    @user = User.find(session[:user_id])
+    @entry = Entry.find(params[:id])
+    @entry.destroy
+    flash[:notice_entry] = "Entry deleted"
+    redirect_to user_path(@user)
   end
 
   private
