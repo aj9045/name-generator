@@ -1,6 +1,10 @@
 <h2>Saved Names</h2>
+  <% if flash[:notice_entry] %>
+    <div class="notice"><%= flash[:notice_entry] %></div>
+  <% end %>
 <ol>
-  <% @user.entries.each do |entry| %>
+
+  <% @user.entries.order("id").each do |entry| %>
     <% first_name_id = FirstName.find(entry.first_name_id)%>
     <% last_name_id = LastName.find(entry.last_name_id) %>
 
