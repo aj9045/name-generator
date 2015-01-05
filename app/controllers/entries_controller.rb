@@ -19,10 +19,6 @@ class EntriesController < ApplicationController
     end
   end
 
-  def show
-
-  end
-
   def edit
     @user = User.find(session[:user_id])
     @entry = Entry.find(params[:id])
