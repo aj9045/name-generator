@@ -1,1 +1,11 @@
-edit.html.erb
+<%= form_for @user do |f| %>
+  <%= f.label :username %>
+  <%= f.text_field :username, :value => @user.username %>
+
+  <%= f.label :name %>
+  <%= f.text_field :name, :value => @user.name %>
+
+  <%= f.label :about %>
+  <%= f.text_field :about, :value => @user.about %>
+  <%= f.submit "Save Changes" %>
+<% end %>

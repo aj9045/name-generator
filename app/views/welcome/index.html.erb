@@ -1,1 +1,19 @@
-welcome/index
+This is where the generator shall go.
+<br>
+
+<%= form_for @entry, :url => entries_path do |f| %>
+  <%= f.label :first_name %>
+  <%= f.text_field :first_name, :value => @random_first_name %>
+
+  <%= f.label :last_name %>
+  <%= f.text_field :last_name, :value => @random_last_name %>
+  <% if session[:user_id] != nil %>
+
+    <%= f.submit "Save" %>
+  <% end %>
+<%end%>
+  <% if flash[:notice] %>
+    <div class="notice"><%= flash[:notice] %></div>
+  <% end %>
+
+<%= link_to "Generate", root_path %>

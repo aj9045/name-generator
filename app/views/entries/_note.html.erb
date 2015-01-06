@@ -1,0 +1,29 @@
+<h2>Saved Names</h2>
+  <% if flash[:notice_entry] %>
+    <div class="notice"><%= flash[:notice_entry] %></div>
+  <% end %>
+<% if @user.entries.empty? %>
+  <p>You have not saved any names yet!</p>
+<% else %>
+  <ol>
+
+    <% @user.entries.order("id").each do |entry| %>
+      <% first_name_id = FirstName.find(entry.first_name_id)%>
+      <% last_name_id = LastName.find(entry.last_name_id) %>
+
+        <li>
+          <%= first_name_id.first_name + " " + last_name_id.last_name %>
+          <% if session[:user_id] == @user.id %>
+
+             <%= link_to 'Delete Name', entry, :confirm => 'Are you sure?', :method => :delete %>
+           <% end %>
+        </li>
+          <ul>
+            <li>
+              <%= entry.note %>
+            </li>
+          </ul>
+          <%= render :partial => "entries/entry_buttons", locals: { entry: entry, user: @user } %>
+    <% end %>
+  </ol>
+<% end %>

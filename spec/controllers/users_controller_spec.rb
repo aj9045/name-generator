@@ -100,10 +100,6 @@ describe UsersController, type: :controller do
       delete :destroy, id: @user
       expect(assigns[:user]).to eq(@user)
     end
-    it "validates that the user's id is the same as the logged in user" do
-      delete :destroy, id: @user
-      expect(session[:user_id]).to eq(@user.id)
-    end
     it "removes user from database" do
       expect{ delete :destroy, id: @user }.to change(User, :count).by(-1)
     end

@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   validates_presence_of :username, :name
   validates_presence_of :password_digest, on: :create
 
-  has_many :entries
+  has_many :entries, :dependent => :destroy
   has_many :first_names, through: :entries
   has_many :last_names, through: :entries
 
